@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元素向右移动</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        #a {
+            margin-left: 100px;
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            transform: translateX(0);
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="a"></div>
+    <script>
+        let a = document.getElementById("a");
+        console.log(getComputedStyle(a).transform);
+        let tsf = getComputedStyle(a).transform;
+        let left = 0;
+        a.addEventListener("click", function () {
+            // if (a.style.marginLeft === "") {
+            //     a.style.marginLeft = 100 + 'px';
+            // } else {
+            //     a.style.marginLeft = parseInt(a.style.marginLeft) + 100 + 'px';
+            // }
+            if (a.style.transform == "") {
+                a.style.transform = `translateX(${left}px)`
+            }
+            left += 100
+            a.style.transform = `${tsf} translateX(${left}px)`
+        })  
+    </script>
+</body>
+
+</html>

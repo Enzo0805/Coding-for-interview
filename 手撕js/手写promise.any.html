@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promise.any</title>
+</head>
+
+<body>
+    <script>
+        function promiseAny(promises) {
+            return new Promise((resolve, reject) => {
+                let count = promises.length;
+                for (let i = 0; i < promises.length; i++) {
+                    promises[i]
+                        .then((res) => {
+                            resolve(res);
+                        })
+                        .catch((err) => {
+                            count--;
+                        })
+                        .finally(() => {
+                            if (!count) {
+                                reject(AggregateError);
+                            }
+                        })
+                }
+            })
+        }
+
+        const promise1 = Promise.reject(3);
+        const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, 'foo'));
+        const promises = [promise2, promise1];
+        promiseAny(promises)
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err))
+    </script>
+</body>
+
+</html>

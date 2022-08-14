@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sleep</title>
+</head>
+
+<body>
+    <script>
+        //需求：sleep(1).then(() => { console.log(3) })
+        const sleep1 = (time) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(3);
+                }, time * 1000)
+            })
+        }
+
+        // sleep1(1).then((res) => {
+        //     console.log(res);
+        // })
+
+        //场景题，给了一个sleep函数， 实现功能，隔1s打印1，再隔2s打印2，隔3秒打印3
+        function sleep(num, timeout) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(num);
+                }, timeout);
+            })
+        }
+        function main() {
+            // 写代码
+            sleep(1, 1000)
+                .then((res) => {
+                    console.log(res);
+                    return sleep(2, 2000);
+                })
+                .then((res) => {
+                    console.log(res);
+                    return sleep(3, 3000);
+                })
+                .then((res) => {
+                    console.log(res)
+                })
+        }
+
+        main();
+    </script>
+</body>
+
+</html>

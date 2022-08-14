@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>判断参数是否相等</title>
+</head>
+
+<body>
+    <script>
+        function deepEqual(a, b) {
+            if (typeof a !== typeof b) {
+                return false;
+            }
+            if (typeof a !== "object" && typeof b !== "object") {
+                return a === b;
+            }
+            else {
+                let PropsA = Object.getOwnPropertyNames(a);
+                let PropsB = Object.getOwnPropertyNames(b);
+                if (PropsA.length !== PropsB.length) {
+                    return false;
+                }
+                for (let i = 0; i < PropsA.length; i++) {
+                    if (a[PropsA[i]] !== b[PropsB[i]]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+    </script>
+</body>
+
+</html>

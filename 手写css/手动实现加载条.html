@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loading</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+            background-color: rgb(54, 34, 34);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 手写一个loading，1/4圆弧旋转 */
+        .loading {
+            position: relative;
+            border: 3px solid white;
+            border-bottom-color: red;
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            animation: rotate 1s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            50% {
+                transform: rotate(180deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading"></div>
+</body>
+
+</html>

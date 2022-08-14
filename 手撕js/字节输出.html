@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var a = {
+            name: 'A',
+            fun: function () {
+                console.log(this.name);
+            }
+        };
+        a.fun();    //'A'
+        a.fun.call({ name: 'B' });  //'B'
+        var fun1 = a.fun;
+        fun1(); //''  window有一个name属性是空字符串
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组去重</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, 1, '1', 17, true, true, false, false, 'true', 'a', {}, {}];
+        // => [1, '1', 17, true, false, 'true', 'a', {}, {}]
+
+        //方法一：set
+        const res1 = Array.from(new Set(arr));
+        // console.log(res1);
+
+        //方法二：map(也可以用indexof和includes，思路相同)
+        const map = new Map();
+        const res2 = [];
+        for (let i of arr) {
+            if (!map.has(i)) {
+                map.set(i, 1);
+                res2.push(i);
+            }
+        }
+        // console.log(res2);
+
+        //方法三：filter
+        const res3 = arr.filter((item, index) => {
+            return arr.indexOf(item) === index
+        })
+        console.log(res3);
+    </script>
+</body>
+
+</html>

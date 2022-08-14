@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写apply</title>
+</head>
+
+<body>
+    <script>
+        Function.prototype.myApply = function (context, args) {
+            context = context || window;
+            let res = null;
+            context.fn = this;
+            res = context.fn(args);
+            delete context.fn;
+            return res;
+        }
+
+        //test
+        const obj = {
+            value: 1,
+        };
+
+        function fn() {
+            console.log(this.value); // 1
+            return [...arguments]
+        }
+
+        console.log(fn.apply(obj, [1, 2])); // [1, 2]
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写set</title>
+</head>
+
+<body>
+    <script>
+        class mySet {
+            constructor() {
+                this.size = 0;
+                this.list = {};
+            }
+
+            add(val) {
+                if (!this.list[val]) {
+                    this.list[val] = val;
+                    this.size++;
+                    return true;
+                }
+                return false;
+            }
+
+            has(val) {
+                return this.list.hasOwnProperty(val);
+            }
+
+            delete() {
+                if (this.list[val]) {
+                    delete this.list[val];
+                    this.size--;
+                    return true;
+                }
+                return false;
+            }
+
+            clear() {
+                this.list = {};
+                this.size = 0;
+            }
+
+            keys() {
+                return Object.keys(this.list);
+            }
+
+            values() {
+                return Object.values(this.list);
+            }
+
+            entries() {
+                return Object.entries(this.list);
+            }
+
+            forEach(callback) {
+                let keys = this.keys;
+                for (let i = 0; i < keys.length; i++) {
+                    callback(keys[i], this.list);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>循环打印红黄绿</title>
+</head>
+
+<body>
+    <script>
+        //三个亮灯函数
+        const red = () => {
+            console.log("red");
+        }
+        const green = () => {
+            console.log("green");
+        }
+        const yellow = () => {
+            console.log("yellow");
+        }
+
+        //用回调函数实现
+        const task1 = (delay, color, callback) => {
+            setTimeout(() => {
+                switch (color) {
+                    case "red":
+                        red();
+                        break;
+                    case "yellow":
+                        yellow();
+                        break;
+                    case "green":
+                        green();
+                        break;
+                    default:
+                        break;
+                }
+                callback();
+            }, delay);
+        }
+
+        const step1 = () => {
+            task(3000, "red", () => {
+                task(1000, "green", () => {
+                    task(2000, "yellow", step);
+                })
+            })
+        }
+
+        //用promise实现
+        const task2 = (delay, color) => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    switch (color) {
+                        case "red":
+                            red();
+                            break;
+                        case "yellow":
+                            yellow();
+                            break;
+                        case "green":
+                            green();
+                            break;
+                        default:
+                            break;
+                    }
+                    resolve();
+                }, delay);
+            })
+        }
+
+        const step2 = () => {
+            task2(3000, "red")
+                .then(() => task2(1000, "green"))
+                .then(() => task2(2000, "yellow"))
+                .then(step2)
+        }
+
+        step2();
+
+        //用async/await实现
+        const step3 = async () => {
+            await task2(3000, "red");
+            await task2(1000, "green");
+            await task2(2000, "yellow");
+            step3();
+        }
+    </script>
+</body>
+
+</html>

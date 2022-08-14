@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自余数</title>
+</head>
+
+<body>
+    <script>
+        let sum = 3, arr = [[11, 11], [13, 13], [1, 20]];
+        function self(num) {
+            let count = 0;
+            for (let i = num[0]; i <= num[1]; i++) {
+                let tmp = String(i).split("");
+                let res = tmp.reduce((prev, next) => {
+                    return Number(prev) + Number(next);
+                })
+                if (i % res === 1) {
+                    count++;
+                }
+            }
+            return count;
+        }
+        for (let i of arr) {
+            console.log(self(i));
+        }
+
+    </script>
+</body>
+
+</html>

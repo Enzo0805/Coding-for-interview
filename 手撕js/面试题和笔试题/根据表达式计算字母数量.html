@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>根据表达式计算字母数量</title>
+</head>
+
+<body>
+    <script>
+        // function sum(str) {
+        //     // const map = new Map();
+        //     const reg = /^[a-zA-Z]+$/;
+        //     let arr = str.split("");
+        //     while (arr.length) {
+        //         if (Number(arr[arr.length - 1])) {
+        //             console.log(arr[arr.length - 1]);
+        //         }
+        //         arr.pop();
+        //     }
+        // }
+        // console.log(sum("A(B2)3"));
+        // console.log(sum("A3B2"));
+        // console.log(sum("A(A(A2B)2)3C2"));
+        // 输入:A3B2,输出:{"A":3,"B":2}
+        // 输入:A(A(A2B)2)3C2,输出:{"A":16,"B":6,"C":2}
+
+        const calculate = (str) => {
+            let stack = []
+            for (let i = 0; i < str.length; i++) {
+                // 入栈
+                if (str[i] !== ')') {
+                    // 如果是左括号直接入栈
+                    if (str[i] === '(') {
+                        stack.push(str[i])
+                        // 如果是A-Z
+                    } else if (/[A-Z]/.test(str[i])) {
+                        let temp = str[i]
+                        // A-Z后面有数字,计算数字
+                        if (/[2-9]/.test(str[i + 1])) {
+                            while (/[2-9]/.test(str[i + 1])) {
+                                temp += str[i + 1]
+                                i++
+                            }
+                            // 最后以 'A123'这种push进栈,123代表有123个A
+                            stack.push(temp)
+                            // 没数字，就放A1表示只有1个A
+                        } else {
+                            stack.push(temp + '1')
+                        }
+                    }
+                }
+                // 出栈
+                else {
+                    // 临时储存数组
+                    let tempArr = []
+                    while (stack[stack.length - 1] !== '(') {
+                        tempArr.push(stack.pop())
+                    }
+                    stack.pop() //对应的左括号出栈
+                    let mul2 = '' //乘数
+                    // 判断有括号后面是否有乘数
+                    if (/[2-9]/.test(str[i + 1])) {
+                        while (/[2-9]/.test(str[i + 1])) {
+                            mul2 += str[i + 1]
+                            i++
+                        }
+                    } else {
+                        mul2 = 1 //没乘数，则为1
+                    }
+                    // 对临时数组进行乘法，再次入栈
+                    for (let i = tempArr.length - 1; i >= 0; i--) {
+                        let str = tempArr[i][0]
+                        let mul1 = tempArr[i].slice(1)
+                        str += Number(mul1) * Number(mul2)
+                        stack.push(str)
+                    }
+                }
+            }
+            // 统计汇总
+            let obj = {}
+            for (let i of stack) {
+                if (!obj[i[0]]) {
+                    obj[i[0]] = Number(i.slice(1))
+                } else {
+                    obj[i[0]] = obj[i[0]] + Number(i.slice(1))
+                }
+            }
+            return obj
+        }
+        console.log(calculate('A(A(A2B)2)C2'))
+    </script>
+</body>
+
+</html>

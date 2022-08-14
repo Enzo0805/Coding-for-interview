@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写节流</title>
+</head>
+
+<body>
+    <script>
+        //使用date对象
+        function throttle(fn, delay) {
+            let cur = Date.now();
+            return function (...args) {
+                let that = this, now = Date.now();
+                if (now - cur >= delay) {
+                    cur = Date.now();
+                    return fn.apply(that, args);
+                }
+            }
+        }
+        //使用定时器
+        function throttle2(fn, delay) {
+            let timer = null;
+            return function (...args) {
+                let that = this;
+                timer = setTimeout(() => {
+                    fn.apply(that, args);
+                    timer = null;
+                }, delay)
+            }
+        }
+    </script>
+</body>
+
+</html>

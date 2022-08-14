@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序算法</title>
+</head>
+
+<body>
+    <script>
+        //冒泡排序
+        const bubbleSort = (arr) => {
+            let len = arr.length;
+            for (let i = 0; i < len; i++) {
+                for (let j = 0; j < len - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        let temp = arr[j + 1];
+                        arr[j + 1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        //选择排序
+        const selectionSort = (arr) => {
+            const len = arr.length;
+            let minIndex;
+            for (let i = 0; i < len - 1; i++) {
+                minIndex = i;
+                for (let j = i + 1; j < len; j++) {
+                    if (arr[j] < arr[minIndex]) {
+                        minIndex = j;
+                    }
+                }
+                let temp = arr[i];
+                arr[i] = arr[minIndex];
+                arr[minIndex] = temp;
+            }
+            return arr;
+        }
+
+        //插入排序
+        const insertionSort = (arr) => {
+            const len = arr.length;
+            for (let i = 1; i < len; i++) {
+                let preIndex = i - 1, cur = arr[i];
+                while (preIndex >= 0 && arr[preIndex] > cur) {
+                    arr[preIndex + 1] = arr[preIndex];
+                    preIndex--;
+                }
+                arr[preIndex + 1] = cur;
+            }
+            return arr;
+        }
+
+        //归并排序
+        const mergeSort = arr => {
+            const len = arr.length;
+            if (len < 2) return arr;
+            let mid = Math.floor(len / 2);
+            let left = arr.slice(0, mid);
+            let right = arr.slice(mid);
+            return merge(mergeSort(left), mergeSort(right));
+        }
+
+        const merge = (left, right) => {
+            const result = [];
+            while (left.length && right.length) {
+                if (left[0] <= right[0]) {
+                    result.push(left.shift());
+                } else {
+                    result.push(right.shift());
+                }
+            }
+            while (left.length) {
+                result.push(left.shift());
+            }
+            while (right.length) {
+                result.push(right.shift());
+            }
+            return result;
+        }
+
+        //快速排序
+        const quickSort = arr => {
+            const rec = arr => {
+                if (arr.length <= 1) {
+                    return arr;
+                }
+                let mid = arr[0];
+                let left = [], right = [];
+                for (let i = 1; i < arr.length; i++) {
+                    if (arr[i] <= mid) {
+                        left.push(arr[i]);
+                    }
+                    else {
+                        right.push(arr[i]);
+                    }
+                }
+                return [...rec(left), mid, ...rec(right)];
+            }
+            return rec(arr);
+        }
+    </script>
+</body>
+
+</html>

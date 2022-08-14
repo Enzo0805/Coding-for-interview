@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件同步</title>
+</head>
+
+<body>
+    <div>
+        <span>
+            第一行有三个正整数，n(1<=n<=1000000000),m1(1<=m1<=30000),m2(1<=m2<=30000)。 </span>
+                <span>
+                    代表文件总数，游戏本上的文件被修改了多少次，以及老爷机上的文件被修改了多少次。
+                </span>
+
+                文件编号为1到n。小团的每一次修改都会影响到编号属于一个连续区间中的所有文件。
+                第二行和第三行中各有m1个正整数，代表游戏本上每次修改被影响到的文件范围。
+                第二行中的m1个数代表m1次修改中的左端点，第三行中的m1个数代表m1次修改的右端点。
+                第四行和第五行中各有m2个正整数，代表老爷机上每次修改被影响到的文件范围。
+                第二行中的m2个数代表m2次修改中的左端点，第三行中的m2个数代表m2次修改的右端点。
+    </div>
+    <script>
+        let fileSum = 10, leftEdit = 2, rightEdit = 3;
+        let oldLeft = [3, 5], oldRight = [4, 8];
+        let gameLeft = [1, 5, 7], gameRight = [3, 5, 9];
+
+        function sum() {
+            let old = new Array(oldRight[oldRight.length - 1]).fill(false);
+            let game = new Array(gameRight[gameRight.length - 1]).fill(false);
+            let oldRange = [], gameRange = [];
+            for (let i = 0; i < leftEdit; i++) {
+                oldRange.push([oldLeft[i], oldRight[i]]);
+                for (let j = oldRange[i][0]; j <= oldRange[i][1]; j++) {
+                    old[j - 1] = true;
+                }
+            }
+            for (let i = 0; i < rightEdit; i++) {
+                gameRange.push([gameLeft[i], gameRight[i]]);
+                for (let j = gameRange[i][0]; j <= gameRange[i][1]; j++) {
+                    game[j - 1] = true;
+                }
+            }
+
+            let num = (oldRight[oldRight.length - 1]) <= (gameRight[gameRight.length - 1]) ? oldRight[oldRight.length - 1] : (gameRight[gameRight.length - 1]);
+            // console.log(old, game, num);
+            let res = 0;
+            for (let i = 0; i < num; i++) {
+                if (old[i] == true && game[i] == true) {
+                    res++;
+                }
+            }
+            console.log(res);
+        }
+
+        sum();
+    </script>
+</body>
+
+</html>

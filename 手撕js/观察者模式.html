@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观察者模式</title>
+</head>
+
+<body>
+    <script>
+        //被观察者类
+        class Subject {
+            constructor() {
+                this.observerList = [];
+            }
+
+            addObserver(observer) {
+                this.observerList.push(observer);
+            }
+
+            removeObserver(observer) {
+                const index = this.observerList.findIndex(item => item.name = observer.name);
+                this.observerList.splice(index, 1);
+            }
+
+            notifyObserver(message) {
+                this.observerList.forEach((observer) => {
+                    observer.notified(message);
+                })
+            }
+        }
+
+        //观察者类
+        class Observer {
+            constructor(name, subject) {
+                this.name = name;
+                if (subject) {
+                    subject.addObserver(this);
+                }
+            }
+
+            notified(message) {
+                console.log(this.name, 'got message', message);
+            }
+        }
+
+        const subject = new Subject();
+        const observerA = new Observer("A", subject);
+        subject.notifyObserver("hello world");
+
+        const observerB = new Observer("B");
+        subject.addObserver(observerB);
+        subject.notifyObserver("hello");
+
+        //使用proxy实现
+        const queuedObservers = new Set();
+        const observe = fn => queuedObservers.add(fn);
+        const observable = obj => new Proxy(obj, { set });
+
+        function set(target, key, value, receiver) {
+            const res = Reflect.set(target, key, value, receiver);
+            queuedObservers.forEach(cb => cb(target, key, value));
+            return res;
+        }
+
+        const person = observable({
+            name: "Enzo",
+            age: 20
+        })
+
+        const print = (target, key, value) => console.log(target, key, value);
+        observe(print);
+        person.name = "yhr"
+    </script>
+</body>
+
+</html>

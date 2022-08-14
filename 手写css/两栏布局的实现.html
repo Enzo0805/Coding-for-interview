@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两栏布局的实现</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        /* 1、左边float+右边margin */
+        /* .left {
+            height: 100%;
+            width: 200px;
+            background-color: aqua;
+            float: left;
+        }
+
+        .right {
+            height: 100%;
+            background-color: blueviolet;
+            margin-left: 200px;
+
+        } */
+
+        /* 2、左边float+右边触发BFC */
+        .outer {
+            height: 100%;
+            width: 100%;
+        }
+
+        .left {
+            height: 100%;
+            width: 200px;
+            background-color: aqua;
+            float: left;
+        }
+
+        /* 很多种方法：flex或者overflow:hidden */
+        .right {
+            height: 100%;
+            background-color: blueviolet;
+            /* display: flex; */
+            /* overflow: flow-root; */
+        }
+
+        /* 3、flex */
+        /* .outer {
+            height: 100%;
+            width: 100%;
+            display: flex;
+        }
+
+        .left {
+            height: 100%;
+            width: 200px;
+            background-color: aqua;
+        }
+
+        .right {
+            height: 100%;
+            background-color: blueviolet;
+            flex: 1;
+        } */
+
+        /* 4、子绝父相,left设置absolute */
+        /* .outer {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .left {
+            height: 100%;
+            width: 200px;
+            background-color: aqua;
+            position: absolute;
+        }
+
+        .right {
+            height: 100%;
+            margin-left: 200px;
+            background-color: blueviolet;
+        } */
+
+        /* 4、子绝父相,right设置absolute */
+        /* .outer {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .left {
+            height: 100%;
+            width: 200px;
+            background-color: aqua;
+        }
+
+        .right {
+            height: 100%;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 200px;
+            background-color: blueviolet;
+            position: absolute;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+
+</body>
+
+</html>

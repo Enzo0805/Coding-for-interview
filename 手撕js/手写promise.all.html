@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promise.all</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <script>
+        //手写一个promise.all
+        function promiseAll(promises) {
+            return new Promise((resolve, reject) => {
+                if (!Array.isArray(promises)) {
+                    throw new TypeError(`Must be Array`)
+                }
+                //resolveCounter为成功的个数，result为保存成功结果的数组
+                let sum = promises.length;
+                let resolveCounter = 0;
+                let result = [];
+                for (let i = 0; i < sum; i++) {
+                    Promise.resolve(promises[i])
+                        .then(res => {
+                            resolveCounter++;
+                            result.push(res);
+                            //如果都成功了，就resolve并返回result
+                            if (resolveCounter === sum) {
+                                return resolve(result);
+                            }
+                        })
+                        .catch(err => reject(err))
+                }
+            })
+        };
+
+        // test
+        let p1 = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve(1)
+            }, 1000)
+        })
+        let p2 = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve(2)
+            }, 2000)
+        })
+        let p3 = new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                resolve(3)
+            }, 3000)
+        })
+
+        promiseAll([p1, p2, p3]).then(res => console.log(res));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        题目描述：
+        小美正在点外卖。外卖平台上有两种优惠机制：折扣和满减。用户在下单的时候可以选择这两种机制中的一种。
+        折扣机制即为部分商品提供了低于原价的优惠价，在结算的时候按优惠价计价。满减机制则由一些规则组成，每条规则都形如“满c元减d元”，
+        意为若客户结算时所有商品的原价之和不低于c元，则客户可以减免d元。
+        用户只能使用一条满减规则，即若客户结算的商品总价为e元，使用了满c元减d元的规则且e不小于c，则用户只需要支付e-d元。
+        小美有n种备选商品，每种商品均有原价和折扣价。现在小美想知道，若仅购买前1,2,3….直到n种备选商品，是满减机制划算还是折扣机制划算。
+    </div>
+    <div>
+        样例输入
+        3
+        5 10 8
+        5 8 7
+        2
+        15 22
+        1 4
+    </div>
+    <script>
+        function getMinPrice(sum, prices, discount, num, ori, now) {
+            let dis = [], jian = [], allPrice = 0;
+            let res = "";
+            for (let i = 0; i < sum; i++) {
+                if (i == 0) {
+                    dis[i] = discount[i];
+                }
+                else {
+                    dis[i] = dis[i - 1] + discount[i];
+                }
+                allPrice = allPrice + prices[i];
+                let j = 0;
+                if (allPrice > ori[0]) {
+                    while (allPrice >= ori[j]) {
+                        j++;
+                    }
+                    jian[i] = allPrice - now[j - 1];
+                }
+                else {
+                    jian[i] = allPrice;
+                }
+                console.log(dis[i], jian[i]);
+                if (dis[i] > jian[i]) res = res + "M";
+                else if (dis[i] == jian[i]) res = res + "B";
+                else if (dis[i] < jian[i]) res = res + "Z"
+            }
+            return res;
+        }
+
+        let sum = 3;
+        let prices = [5, 10, 8];
+        let discount = [5, 8, 7];
+
+        let num = 2;
+        let ori = [15, 22];
+        let now = [1, 4];
+
+        console.log(getMinPrice(sum, prices, discount, num, ori, now));
+    </script>
+</body>
+
+</html>

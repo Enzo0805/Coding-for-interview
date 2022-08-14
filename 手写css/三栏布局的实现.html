@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三栏布局的实现</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        /* 1、左右absolute */
+        .outer {
+            height: 100%;
+            width: 100%;
+            /* position: relative; */
+            /* display: flex; */
+        }
+
+        .left {
+            height: 100%;
+            width: 200px;
+            position: absolute;
+            background-color: aqua;
+        }
+
+        .right {
+            height: 100%;
+            width: 200px;
+            top: 0;
+            right: 0;
+            position: absolute;
+            background-color: aqua;
+        }
+
+        .center {
+            margin: 0 200px;
+            height: 100%;
+            background-color: antiquewhite;
+        }
+
+        /* 2、flex布局 */
+        /* .left {
+            height: 100%;
+            width: 200px;
+            background-color: aqua;
+        }
+
+        .right {
+            height: 100%;
+            width: 200px;
+            background-color: aqua;
+        }
+
+        .center {
+            background-color: antiquewhite;
+            flex: 1
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="left"></div>
+        <div class="center"></div>
+        <div class="right"></div>
+    </div>
+</body>
+
+</html>

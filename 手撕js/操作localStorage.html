@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function setLocalStorage(name, obj) {
+            obj.maxAge = Date.now();
+            localStorage.setItem(name, JSON.stringify(obj));
+        }
+
+        function getLocalStorage(name) {
+            let obj = JSON.parse(localStorage.getItem(name));
+            let now = Date.now();
+            if (now - obj.maxAge > 3000) {
+                localStorage.removeItem(name);
+                return null;
+            }
+            else {
+                return obj;
+            }
+        }
+
+        setLocalStorage(1, { a: 1 });
+        setTimeout(() => {
+            const x = getLocalStorage(1);
+            console.log(x);
+        }, 2000);
+    </script>
+</body>
+
+</html>

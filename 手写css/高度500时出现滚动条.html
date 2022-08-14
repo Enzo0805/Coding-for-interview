@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* 给div设置宽度100px，最小高度100px，最大高度500px,1px边框，高度大于500px时出现滑动条 */
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .center {
+            width: 100px;
+            min-height: 100px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid red;
+        }
+
+        .inner {
+            height: 600px;
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="center">
+        <div class="inner"></div>
+    </div>
+</body>
+
+</html>

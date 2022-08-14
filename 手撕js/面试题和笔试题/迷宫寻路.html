@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迷宫寻路</title>
+</head>
+
+<body>
+    <div>
+        给定一个包含非负整数的 M x N 迷宫，请找出一条从左上角到右下角的路径，使得路径上的数字总和最小。每次只能向下或者向右移动一步。
+    </div>
+    <script>
+        const minDistance = (m, n, nums) => {
+            for (let i = 0; i < m; i++) {
+                for (let j = 0; j < n; j++) {
+                    if (i === 0 && j === 0) {
+                        continue;
+                    }
+                    else if (i >= 1 && j >= 1) {
+                        nums[i][j] = Math.min(nums[i][j] + nums[i - 1][j], nums[i][j] + nums[i][j - 1]);
+                    }
+                    else if (i >= 1 && j == 0) {
+                        nums[i][j] = nums[i][j] + nums[i - 1][j];
+                    }
+                    else {
+                        nums[i][j] = nums[i][j] + nums[i][j - 1];
+                    }
+                }
+            }
+            return nums[m - 1][n - 1];
+        }
+
+        const m = 3, n = 3;
+        const nums = [
+            [1, 3, 1],
+            [1, 5, 1],
+            [4, 2, 1]
+        ]
+        console.log(minDistance(m, n, nums))
+    </script>
+</body>
+
+</html>

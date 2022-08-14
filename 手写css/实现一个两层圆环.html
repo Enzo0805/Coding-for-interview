@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现一个两层圆环</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrap {
+            height: 80px;
+            width: 80px;
+            border: 2px solid blueviolet;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 50px;
+        }
+
+        .inner {
+            height: 50px;
+            width: 50px;
+            border: 2px solid blueviolet;
+            border-radius: 50%;
+        }
+
+        .round {
+            height: 80px;
+            width: 80px;
+            border: 3px solid red;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .round::before {
+            height: 50px;
+            width: 50px;
+            border: 3px solid red;
+            border-radius: 50%;
+            content: "";
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="inner"></div>
+    </div>
+    <div class="round"></div>
+</body>
+
+</html>

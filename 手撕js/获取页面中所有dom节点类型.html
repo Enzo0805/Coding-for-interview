@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //如何获取页面中出现的所有dom元素的标签类型
+        //得到一个数组，数组的每一项是一个标签名
+        const ele = Array.from(document.querySelector("*"));
+        const map = new Map();
+        const res = [];
+        for (let item of ele) {
+            if (!map.has(item)) {
+                map.set(item);
+                res.push(item);
+            }
+        }
+    </script>
+</body>
+
+</html>

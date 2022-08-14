@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组扁平化</title>
+</head>
+
+<body>
+    <script>
+        const arr = [1, [2, [3, [4, 5]]], 6];
+        // => [1, 2, 3, 4, 5, 6]
+
+        //方法一：Flat
+        const res1 = arr.flat(Infinity)
+        // console.log(res1);
+
+        //方法二：递归
+        const res2 = [];
+        function flatten(arr) {
+            for (let i of arr) {
+                if (Array.isArray(i)) {
+                    flatten(i);
+                }
+                else res2.push(i);
+            }
+        }
+        flatten(arr);
+        // console.log(res2);
+
+        //方法三：reduce()
+        const arr3 = [1, [2, [3, [4, 5]]], 6];
+        const flatten2 = arr => {
+            return arr.reduce((pre, cur) => {
+                return pre.concat(Array.isArray(cur) ? flatten2(cur) : cur);
+            }, [])
+        }
+        const res4 = flatten2(arr);
+        // console.log(res4);
+
+        //携程面试 BFS
+        const flatten3 = arr => {
+            let res = [];
+            let queue = [...arr];
+            while (queue.length) {
+                let len = queue.length;
+                for (let i = 0; i < len; i++) {
+                    let n = queue.shift();
+                    if (Array.isArray(n)) {
+                        queue.push(...n);
+                    }
+                    else {
+                        res.push(n);
+                    }
+                }
+            }
+            return res;
+        }
+
+        console.log(flatten3(arr3));
+    </script>
+</body>
+
+</html>

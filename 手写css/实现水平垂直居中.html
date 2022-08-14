@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现水平垂直居中</title>
+    <style>
+        /* 不定宽高0 */
+        /* 1、flex布局 */
+        /* #father1 {
+            background-color: aqua;
+            height: 500px;
+            width: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #son1 {
+            background-color: #fff;
+            height: 100px;
+            width: 100px;
+        } */
+
+        /* 2、table布局 */
+        /* #father1 {
+            background-color: aqua;
+            height: 500px;
+            width: 500px;
+            display: table-cell;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        #son1 {
+            display: inline-block;
+            background-color: #fff;
+            height: 100px;
+            width: 100px;
+        } */
+
+        /* 3、grid布局 */
+        /* #father1 {
+            background-color: aqua;
+            height: 500px;
+            width: 500px;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #son1 {
+            background-color: #fff;
+            height: 100px;
+            width: 100px;
+        } */
+
+        /* 4、定位+margin:auto */
+        /* #father1 {
+            background-color: aqua;
+            height: 500px;
+            width: 500px;
+            position: relative;
+        }
+
+        #son1 {
+            background-color: #fff;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+        } */
+
+        /* 5、定位+margin:-(自身长度一半) */
+        /* #father1 {
+            background-color: aqua;
+            height: 500px;
+            width: 500px;
+            position: relative;
+        }
+
+        #son1 {
+            background-color: #fff;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin-left: -50px;
+            margin-top: -50px;
+        } */
+
+        /* 6、绝对定位+transform */
+        #father1 {
+            background-color: aqua;
+            height: 500px;
+            width: 500px;
+            position: relative;
+        }
+
+        #son1 {
+            background-color: #fff;
+            height: 100px;
+            width: 100px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="father1">
+        <div id="son1"></div>
+    </div>
+</body>
+
+</html>

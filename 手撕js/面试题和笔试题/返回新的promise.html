@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function check(promiseA) {
+            let cur = new Date();
+            promiseA.then((res) => {
+                let now = new Date();
+                if (now - cur < 1000) {
+                    console.log("成功了");
+                }
+                else {
+                    console.log("超时了");
+                }
+            })
+        }
+
+        let A = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve(1);
+            }, 950);
+        })
+
+        check(A);
+    </script>
+</body>
+
+</html>

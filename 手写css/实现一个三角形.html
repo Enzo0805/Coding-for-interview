@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现一个三角形</title>
+    <style>
+        .div1 {
+            width: 0;
+            height: 0;
+            border: 100px solid;
+            border-color: orange blue red green;
+            margin-bottom: 30px;
+        }
+
+        .div2 {
+            width: 0;
+            height: 0;
+            border-top: 100px solid red;
+            border-right: 100px solid transparent;
+            border-left: 100px solid transparent;
+        }
+
+        .div3 {
+            width: 0;
+            height: 0;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid transparent;
+            border-left: 100px solid green;
+        }
+
+        /* 实现一个扇形，利用border-radius */
+        .div4 {
+            width: 0;
+            height: 0;
+            border: 100px solid transparent;
+            border-radius: 100px;
+            border-top-color: red;
+        }
+
+        /* 实现一个正方形，大小随视窗变化 */
+        .square {
+            width: 10%;
+            height: 10vw;
+            background-color:aqua;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div1"></div>
+    <div class="div2"></div>
+    <div class="div3"></div>
+    <div class="div4"></div>
+    <div class="square"></div>
+</body>
+
+</html>

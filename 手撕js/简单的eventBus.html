@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eventBus</title>
+</head>
+
+<body>
+    <script>
+        class eventBus {
+            constructor() {
+                this.eventObj = {};
+            }
+
+            //参数：事件名称，绑定的回调函数
+            on(eventName, cb) {
+                if (this.eventObj[eventName]) {
+                    //如果绑定了该事件，就把回调函数加进执行数组
+                    this.eventObj[eventName].push(cb);
+                } else {
+                    this.eventObj[eventName] = [cb];
+                }
+            }
+
+            //移除绑定事件
+            off(eventName) {
+                if (this.eventObj[eventName]) {
+                    delete this.eventObj[eventName];
+                }
+            }
+
+            //触发事件
+            emit(eventName, ...params) {
+                if (!this.eventObj[eventName]) {
+                    console.log("事件不存在");
+                }
+                else {
+                    this.eventObj[eventName].map(cb => {
+                        cb(...params)
+                    })
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

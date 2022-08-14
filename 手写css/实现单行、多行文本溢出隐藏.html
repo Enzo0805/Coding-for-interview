@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现单行、多行文本溢出隐藏</title>
+    <style>
+        /* 多行文本溢出显示 */
+        .first {
+            /* 因为设置了显示的行数所以不设置高度 */
+            width: 200px;
+            overflow: hidden;
+            /* 设置溢出后用省略号表示 */
+            text-overflow: ellipsis;
+            /* 设置盒子类型实现兼容 */
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+        }
+
+        /* 单行文本溢出显示 */
+        .last {
+            height: 50px;
+            width: 100px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="first" style="margin-bottom: 20px;">嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么</div>
+    <div class="last">嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么嘉然今天吃什么</div>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const promises = [];
+        for (let i = 0; i < 5; i++) {
+            promises[i] = new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(i);
+                }, 1000);
+            })
+        }
+
+        //区别
+        (async function () {
+            for (let i = 0; i < 5; i++) {
+                await promises[i];
+            }
+        })()
+
+
+        promises.forEach(async (item) => {
+            await item;
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现浅拷贝</title>
+</head>
+
+<body>
+    <script>
+        const obj = { a: 1, b: { c: 2, } };
+        //方法一：object.assign()
+        const obj1 = {}
+        Object.assign(obj1, obj);
+
+        //方法二：es6扩展运算符
+        const obj2 = { ...obj };
+        // console.log(obj2);
+
+        //使用数组方法对数组实现浅拷贝
+        //方法三：slice()
+        const arr = [1, 2, 3];
+        const arr1 = arr.slice();
+
+        //方法四：concat()
+        const arr2 = arr.concat();
+        // console.log(arr1, arr2);
+
+        //手写浅拷贝
+        function shallowCopy(obj) {
+            if (!obj || typeof obj !== "object") return;
+            const newObj = Array.isArray(obj) ? [] : {};
+            for (let i in obj) {
+                if (obj.hasOwnProperty(i)) {
+                    newObj[i] = obj[i];
+                }
+            }
+            return newObj;
+        }
+
+        const obj3 = shallowCopy(obj);
+        console.log(obj3);
+        obj3.b.c = 1;
+        console.log(obj);
+
+    </script>
+</body>
+
+</html>

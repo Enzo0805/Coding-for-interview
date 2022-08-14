@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue2响应式</title>
+</head>
+
+<body>
+    <input type="text" id="input">
+    <span id="span"></span>
+
+    <script>
+        let obj = {};
+        let input = document.getElementById("input");
+        let span = document.getElementById("span");
+        Object.defineProperty(obj, "text", {
+            get() {
+                console.log("got data");
+            },
+            set(newVal) {
+                console.log("data updated");
+                input.value = newVal;
+                span.innerHTML = newVal;
+            }
+        })
+
+        input.addEventListener("keyup", function (e) {
+            obj.text = e.target.value;
+        })
+
+        console.log(obj.text);
+    </script>
+</body>
+
+</html>

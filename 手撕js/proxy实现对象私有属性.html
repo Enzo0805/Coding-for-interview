@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //使用proxy实现对象私有属性，属性以_开头则不能访问
+        const handler = {
+            get(target, key) {
+                invariant(key, "get");
+                return target[key];
+            },
+
+            set(target, key, value) {
+                invariant(key, "set");
+                target[key] = value;
+                return true;
+            }
+        }
+
+        function invariant(key, type) {
+            if (key[0] === "_") {
+                throw new Error(`Invalid attempt to ${type} private "${key}" property`);
+            }
+        }
+        const person = {
+            _id: 0,
+            name: "Enzo",
+            age: 20
+        }
+
+        const proxy = new Proxy(person, handler);
+        console.log(proxy.name);
+        console.log(proxy._id);
+        console.log(proxy._id = 10);
+    </script>
+</body>
+
+</html>

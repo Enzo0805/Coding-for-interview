@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promise.allSettled</title>
+</head>
+
+<body>
+    <script>
+        function allSettled(promises) {
+            return new Promise((resolve) => {
+                if (!Array.isArray(promises)) {
+                    throw TypeError("must be array")
+                }
+                let res = [], count = promises.length;
+                for (let i = 0; i < promises.length; i++) {
+                    promises[i]
+                        .then((result) => {
+                            res.push({
+                                status: "fullfilled",
+                                value: result
+                            })
+
+                        })
+                        .catch((err) => {
+                            res.push({
+                                status: "rejected",
+                                reason: err
+                            })
+
+                        })
+                        .finally(() => {
+                            if (!--count) {
+                                return resolve(res);
+                            }
+                        })
+                }
+            })
+
+        }
+
+        const promise1 = Promise.resolve(3);
+        const promise2 = new Promise((resolve, reject) => setTimeout(reject, 100, 'foo'));
+        const promises = [promise2, promise1];
+        allSettled(promises).then(res => console.log(res))
+    </script>
+</body>
+
+</html>

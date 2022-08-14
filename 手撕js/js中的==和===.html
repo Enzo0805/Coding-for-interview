@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js中的==和===</title>
+</head>
+
+<body>
+    <script>
+        //一般的对象进行隐式类型转换，会调用ToPrimitive方法
+        //一般都是先调valueOf(),再调toString()
+        console.log({} == []);  //false
+        console.log({} == "");  //false
+        console.log("" == []);  //true
+        console.log([] == []);  //false
+        console.log({} == {});  //false
+        console.log([].valueOf().toString());
+        console.log({}.valueOf().toString());
+        console.log(Object.prototype.toString.call([]));
+
+    </script>
+</body>
+
+</html>

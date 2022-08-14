@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高并发</title>
+</head>
+
+<body>
+    <script>
+        //处理高并发, 100 条数据，带宽为 10， 跑满带宽
+        const message = new Array(100).fill(" ");
+        for (let i = 0; i < 100; i++) {
+            message[i] = `第${i + 1}条数据`;
+        }
+
+        //模拟axios请求这一百条数据
+        const myAxios = (index) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(message[index]);
+                }, 1000 * Math.random());
+            })
+        }
+
+        //并发操作，跑满带宽
+        const download = () => {
+            return new Promise((resolve, reject) => {
+                const _resolve = resolve;
+                //答案
+                const ans = [];
+                //进程池
+                const process = [];
+                let num = 0;
+                while (num < 10) {
+                    addProcess(num);
+                    num++;
+                }
+
+                //添加进程
+                function addProcess(id) {
+                    const work = myAxios(id).then((res) => {
+                        console.log(res);
+                        ans.push(res);
+                        //执行后就从process里面删除
+                        const idx = process.indexOf(work);
+                        process.splice(idx, 1);
+                        if (process.length === 0) _resolve(ans);
+                        if (num < 99) addProcess(++num);
+                    });
+                    process.push(work);
+                }
+            })
+        }
+
+        download().then((res) => {
+            console.log(res);
+        })
+    </script>
+</body>
+
+</html>

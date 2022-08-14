@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象扁平化</title>
+</head>
+
+<body>
+    <script>
+        let res = {};
+        function flatten(key, obj) {
+            if (!obj) return;
+            if (typeof obj === "object") {
+                let newObj = {};
+                for (let k in obj) {
+                    if (obj.hasOwnProperty(k)) {
+                        if (Array.isArray(obj[k])) {
+                            for (let i = 0; i < obj[k].length; i++) {
+                                if (obj[k][i]) {
+                                    let Keys = `${key}${k}[${i}]`
+                                    flatten(Keys, obj[k][i]);
+                                }
+                            }
+                        }
+                        else if (typeof obj[k] === "object") {
+                            for (let i in obj[k]) {
+                                if (obj[k][i]) {
+                                    let Keys = `${key}${k}.${i}`
+                                    flatten(Keys, obj[k][i]);
+                                }
+                            }
+                        }
+                        else {
+                            let Keys = key ? `${key}.${k}` : k;
+                            res[Keys] = obj[k];
+                        }
+                    }
+                }
+            }
+            else {
+                res[key] = obj;
+            }
+        }
+        let obj = {
+            a: "a",
+            b: [1, { c: true }, [3]],
+            d: {
+                e: undefined,
+                f: 3
+            },
+            g: null,
+        }
+        flatten("", obj)
+        console.log(res);
+    </script>
+</body>
+
+</html>

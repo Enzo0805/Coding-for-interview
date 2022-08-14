@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function isEven(arr, N, K) {
+            let dp = [];
+            for (let i = 0; i < N; i++) {
+                let newDp = [];
+                if (arr[i] % 2) {
+                    newDp[2] = (dp[2] + 1) % N;
+                    newDp[3] = (dp[3]) % N;
+                    for (let j = 2; j <= K; j++) {
+                        newDp[j * 2] = (dp[(j - 1) * 2 + 1] + dp[j * 2]) % N;
+                        newDp[j * 2 + 1] = (dp[(j - 1) * 2] + dp[j * 2 + 1]) % N;
+                    }
+
+                }
+                else {
+                    newDp[2] = (dp[2]) % N;
+                    newDp[3] = (dp[3] + 1) % N;
+                    for (let j = 2; j <= K; j++) {
+                        newDp[j * 2] = (dp[(j - 1) * 2] + dp[j * 2]) % N;
+                        newDp[j * 2 + 1] = (dp[(j - 1) * 2 + 1] + dp[j * 2 + 1]) % N;
+                    }
+                }
+                dp = newDp;
+            }
+            return dp[K * 2 + 1] % N;
+        }
+
+        let res = isEven([1, 2, 3, 4, 5], 5, 2);
+        console.log(res);
+    </script>
+</body>
+
+</html>

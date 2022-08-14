@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写深拷贝</title>
+</head>
+
+<body>
+    <script>
+        // 不能解决循环引用问题
+        function deepCopy(obj) {
+            if (!obj || typeof obj !== "object") return;
+            const newObj = Array.isArray(obj) ? [] : {};
+            for (let k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    newObj[k] = typeof obj[k] === "object" ? deepCopy(obj[k]) : obj[k];
+                }
+            }
+            return newObj;
+        }
+
+        //用weakmap解决循环引用
+        const deepClone = (obj, map = new WeakMap()) => {
+            if (!obj || typeof obj !== "object") return obj;
+            if (map.has(obj)) return map.get(obj);
+            const cloneTarget = Array.isArray(obj) ? [] : {};
+            map.set(obj, cloneTarget);
+            for (const key in obj) {
+                cloneTarget[key] = deepClone(obj[key], map);
+            }
+            return cloneTarget;
+        }
+    </script>
+</body>
+
+</html>

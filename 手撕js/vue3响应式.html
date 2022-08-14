@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue3响应式</title>
+</head>
+
+<body>
+    <script>
+        const reactive = (target) => {
+            const handler = {
+                set(target, key, value, receiver) {
+                    console.log(`将${key}由->${target[key]}->设置成->${value}`);
+                    Reflect.set(target, key, value, receiver);
+                },
+                get(target, key, receiver) {
+                    console.log(`访问了${key}属性`);
+                    return Reflect.get(target, key, receiver);
+                }
+            }
+            return new Proxy(target, handler);
+        }
+
+        const data = reactive({
+            name: "Enzo",
+            age: 20
+        })
+
+        console.log(data.name);
+        console.log(data.age = 18);
+    </script>
+</body>
+
+</html>

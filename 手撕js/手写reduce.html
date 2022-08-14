@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写reduce</title>
+</head>
+
+<body>
+    <script>
+        Array.prototype.myReduce = function (cb, initValue) {
+            let arr = this;
+            let sum = initValue || arr[0];
+            if (initValue) {
+                for (let i = 0; i < arr.length; i++) {
+                    sum = cb.call(arr, sum, arr[i], i, arr);
+                }
+            }
+            else {
+                for (let i = 1; i < arr.length; i++) {
+                    sum = cb.call(arr, sum, arr[i], i, arr);
+                }
+            }
+            return sum;
+        }
+
+        const r = [2, 4, 8, 1].myReduce((a, b) => Math.max(a, b))
+        console.log(r) // 输出： 8
+
+        const arr = [1, 2, 3, 4];
+        const initVal = 0;
+        const total = arr.reduce((acc, cur, index, array) => {
+            console.log(acc, cur);
+            // 0 1
+            // 1 2
+            // 3 3
+            // 6 4
+            return acc + cur;
+        }, initVal);
+        console.log(total); // 输出：10
+    </script>
+</body>
+
+</html>

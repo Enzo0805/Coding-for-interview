@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const text = `
+- 章节一
+  - 标题一
+  - 标题二
+    - 子标题三
+- 章节二
+  - 标题一
+  - 标题二
+`;
+
+        class Node {
+            constructor({ value, level }) {
+                this.value = value;
+                this.level = level;
+                this.children = [];
+            }
+        }
+
+        function parseTree(text) {
+            let lines = text.split("\n");
+            let res = [];
+            for (let i = 1; i < lines.length - 1; i++) {
+                let line = lines[i];
+                let arr = line.match(/\s/g);
+                let length = (arr.length + 1) / 2
+                let node = new Node({
+                    value: line.split(" ")[1],
+                    level: length
+                })
+                let children;
+                if (res[res.length - 1] !== undefined) {
+                    children = res[res.length - 1].children;
+                }
+                for (let i = 0; i < length; i++) {
+                    if (length === 1) {
+                        res.push(node);
+                    }
+                    else if (i > 0) {
+                        if (i === length - 1) {
+                            children.push(node);
+                        }
+                        else {
+                            children = children[children.length - 1].children;
+                        }
+                    }
+                }
+            }
+            return res;
+        }
+
+        const tree = parseTree(text);
+        console.log(tree);
+    </script>
+</body>
+
+</html>

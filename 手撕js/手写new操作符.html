@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写new</title>
+</head>
+
+<body>
+    <script>
+        function myNew() {
+            let obj = {};
+            let f = [].shift.call(arguments); //取参数的第一项作为构造函数
+            obj._proto_ = f.prototype;    //把新建对象的_proto_指向构造函数的prototype
+            let res = f.apply(obj, arguments); //执行构造函数，用result返回结果
+            if (typeof res === Object || res instanceof Function) {
+                return res;
+            }
+            else return obj;    //如果返回结果是对象或函数就返回，不是就返回obj
+        }
+
+        function Person(name, hobby) {
+            this.name = name;
+            this.hobby = hobby;
+        }
+
+        var p2 = myNew(Person, "小明", "sleep");
+        console.log(p2.name, p2.hobby);
+    </script>
+</body>
+
+</html>
