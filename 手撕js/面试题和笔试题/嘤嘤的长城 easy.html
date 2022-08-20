@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // [2,1,2,1,2] [1,9,1,9] 是长城
+      // [2,1,3,2,4] 不是长城
+      // 输入：[1,1,4,5,1,4]  输出：11
+      // 结果：[4,5,4,5,4,5]
+      const greatWall = (arr) => {
+        const odd = [],
+          even = [];
+        for (let i = 0; i < arr.length; i++) {
+          i % 2 === 0 ? odd.push(arr[i]) : even.push(arr[i]);
+        }
+        odd.sort((a, b) => a - b);
+        even.sort((a, b) => a - b);
+        let a = 0,
+          b = 0;
+        for (let i = 0; i < odd.length; i++) {
+          a = a + odd[odd.length - 1] - odd[i];
+        }
+        for (let i = 0; i < even.length; i++) {
+          b = b + even[even.length - 1] - even[i];
+        }
+        if (odd[odd.length - 1] === even[even.length - 1]) {
+          return a + b + (odd.length <= even.length ? odd.length : even.length);
+        } else {
+          return a + b;
+        }
+        return a + b;
+      };
+      console.log(greatWall([1, 1, 4, 5, 1, 4]));
+    </script>
+  </body>
+</html>
