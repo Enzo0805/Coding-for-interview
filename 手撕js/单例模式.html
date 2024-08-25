@@ -1,40 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>单例模式</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <script>
-        class CreateUser {
-            constructor(name) {
-                this.name = name;
-                this.getName();
-            }
-            getName() {
-                return this.name;
-            }
+      class CreateUser {
+        constructor(name) {
+          this.name = name;
+          this.getName();
         }
+        getName() {
+          return this.name;
+        }
+      }
 
-        //利用闭包实现
-        const ProxyMode = (function () {
-            let instance = null;
-            return function (name) {
-                if (!instance) {
-                    instance = new CreateUser(name);
-                }
-                return instance;
-            }
-        })()
+      //利用闭包实现
+      const ProxyMode = (function () {
+        let instance = null;
+        return function (name) {
+          if (!instance) {
+            instance = new CreateUser(name);
+          }
+          return instance;
+        };
+      })();
 
-        const a = new ProxyMode("a");
-        const b = new ProxyMode("b");
-        console.log(a === b);
+      const a = new ProxyMode("a");
+      const b = new ProxyMode("b");
+      console.log(a === b);
     </script>
-</body>
-
+  </body>
 </html>
